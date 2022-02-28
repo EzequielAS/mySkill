@@ -12,17 +12,33 @@ import { Button } from '../components/Button'
 import { SkillCard } from '../components/SkillCard'
 
 
+type SkillList = {
+  id: string;
+  name: string;
+}
+
+
 export function Home() {
   const [newSkill, setNewSkill] = useState('')
-  const [mySkills, setMySkills] = useState([])
+  const [mySkills, setMySkills] = useState<SkillList[]>([])
   const [greeting, setGreeting] = useState('')
 
   function handleAddNewSkill() {
     if(newSkill === '')
       return
 
-    setMySkills(oldSkills => [...oldSkills, newSkill])
+    let object = {
+      id: String(new Date().getTime()),
+      name: newSkill
+    }
+    
+
+    setMySkills(oldSkills => [...oldSkills, object])
     setNewSkill('')
+  }
+
+  function handleRemoveNewSkill(id: string) {
+    setMySkills(oldSkills => oldSkills.filter(skill => skill.id !== id))
   }
 
   useEffect(() => {
@@ -63,11 +79,12 @@ export function Home() {
         
         <FlatList
           data={mySkills}
-          keyExtractor={(_, index) => index}
+          keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <SkillCard 
-              key={item}
-              skill={item}
+              key={item.id}
+              skill={item.name}
+              onPress={() => handleRemoveNewSkill(item.id)}
             />
           )}
         />

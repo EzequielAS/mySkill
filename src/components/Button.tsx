@@ -2,10 +2,15 @@ import React from "react"
 import {
     TouchableOpacity,
     Text,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacityProps
 } from 'react-native'
 
-export function Button({ ...rest }) {
+// interface ButtonProps extends TouchableOpacityProps {   
+//     title: string;                                     caso quisesse pegar todas as propriedades do botão e outras
+// }
+
+export function Button({ ...rest }: TouchableOpacityProps) {
     return (
         <TouchableOpacity 
             style={styles.button}
