@@ -17,7 +17,6 @@ type SkillList = {
   name: string;
 }
 
-
 export function Home() {
   const [newSkill, setNewSkill] = useState('')
   const [mySkills, setMySkills] = useState<SkillList[]>([])
@@ -31,7 +30,6 @@ export function Home() {
       id: String(new Date().getTime()),
       name: newSkill
     }
-    
 
     setMySkills(oldSkills => [...oldSkills, object])
     setNewSkill('')
@@ -49,7 +47,7 @@ export function Home() {
     else setGreeting('Good night')
   }, [])
 
-
+  
   return (
       <View style={styles.container}>
 
